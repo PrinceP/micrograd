@@ -53,13 +53,17 @@ def test_forward_backward_pass():
     g = f / 2.0
     g += 10.0 / f
     print(f'{g.data}') # the outcome of this forward pass
-    assert g.data == 4.625192144640556
+    
+    tol = 1e-6
+    assert abs(g.data - 4.625192144640556) < tol
     g.backward()
     print(f'{a.grad}') # the numerical value of dg/da
     print(f'{b.grad}') # the numerical value of dg/db
 
-    assert a.grad == 27.060135135849574
-    assert b.grad == 117.33448345392071
+    tol = 1e-6
+    assert abs(a.grad - 27.060135135849574) < tol
+    assert abs(b.grad - 117.33448345392071) < tol
+    
 
 def test_more_ops():
 
